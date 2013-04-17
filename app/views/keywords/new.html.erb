@@ -1,0 +1,5 @@
+<%= form_for @keyword do |f| %>
+  <%= f.label :keyword_text, 'Please enter the movie name' %>:
+  <%= f.text_field :keyword%><br />
+  <%= f.submit 'Search'%>
+<% end %>
