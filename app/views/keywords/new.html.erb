@@ -1,5 +1,19 @@
+<html>
+<head>
+<%= stylesheet_link_tag 'style.css'%>
+</head>
+<body>
+  <div><img src="/admitoneticket.gif"/></div>
+  <br/>
+  <h3>The movie trend analyzer</h3>
+  <br/>
 <%= form_for @keyword do |f| %>
   <%= f.label :keyword_text, 'Please enter the movie name' %>:
   <%= f.text_field :keyword%><br />
+  <br/>
   <%= f.submit 'Search'%>
 <% end %>
+</body>
+</html>
+
+
