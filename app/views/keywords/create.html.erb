@@ -24,7 +24,7 @@
     }
 </style>
 <div class="left">
-  <h2 align=center><b>From IMDB</b></h2>
+  <h2 align=center><b><%= @imdb_data['title'] %></b></h2>
   <img src="<%= @imdb_data['poster'] %>"/> <br/>
   <b>Runtime:</b><%= @imdb_data['runtime'][0] %>
   <br/>
@@ -40,7 +40,7 @@
   <br/>
 </div>
 <div class="right">
-  <h2 align=center><b>From Twitter</b></h2>
+  <h2 align=center><b>Tweets about the movie</b></h2>
 
   <div id="tickerContainer">
     <dl id="ticker">
