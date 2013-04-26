@@ -1,0 +1,45 @@
+#ticker {
+    width:900px;
+    height: 500px;
+    overflow:auto;
+    margin: 0;
+}
+#ticker dt {
+    font: bold 14px/normal Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    padding:0 10px 5px 10px;
+    background-color:#e5e5e5;
+    padding-top:10px;
+    border-bottom:none;
+    border-right:none;
+    text-align: justify;
+
+}
+
+
+#ticker dd {
+    margin-left:0;
+    font: normal 12px/normal Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    border-bottom:1px dotted #aaaaaa;
+    background-color:#e5e5e5;
+    text-align: justify;
+    padding:0px 10px 5px 10px;
+}
+
+#ticker dd p{
+    margin-top: 10px;
+    font: normal 11px/normal Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+#ticker dd.last {
+    border-bottom:1px solid #ffffff;
+}
+
+#ticker div {
+    margin-top:0px;
+    list-style:none;
+    background-color:#e5e5e5;
+    font:normal 13px Cursive;
+    text-align: justify;
+    font-weight: bold;
+    padding: 3px 10px 0 0px;
+}
