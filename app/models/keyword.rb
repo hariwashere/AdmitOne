@@ -2,9 +2,14 @@ require 'net/http'
 
 class Keyword < ActiveRecord::Base
   def twitter_data(keyword)
-    solr = RSolr.connect :url => 'http://10.0.0.10:8983/solr'
-    response = solr.get 'select', :params => {:q => 'tweet:"' + keyword + '"'}
-    response['response']['docs']
+    solr = RSolr::Ext.connect :url => 'http://10.0.0.10:8983/solr'
+
+    #response = solr.get 'select', :params => {:q => 'tweet:"' + keyword + '"'}
+    solr_params = {
+        :phrases=>{:tweet => keyword},
+        :facets=>{:fields=>['tweet']}
+    }
+    solr.find solr_params, :method => :post
   end
 
   def facebook_data(keyword)
@@ -17,7 +22,7 @@ class Keyword < ActiveRecord::Base
     request = Net::HTTP::Get.new( uri.path+ '?' + request.body )
 
     response = http.request(request)
-    response.body
+    JSON.parse(response.body)
   end
 
   def imdb_data(keyword)

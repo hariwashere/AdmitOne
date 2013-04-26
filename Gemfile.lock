@@ -83,6 +83,8 @@ GEM
       json (~> 1.4)
     rsolr (1.0.9)
       builder (>= 2.1.2)
+    rsolr-ext (1.0.3)
+      rsolr (>= 1.0.2)
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -112,5 +114,6 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.9)
   rsolr
+  rsolr-ext
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)

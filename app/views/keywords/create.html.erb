@@ -10,7 +10,7 @@
     .left {
         float: left;
         width: 50%;
-        height: 565px;
+        height: 620px;
         background-color: #D2E0DD;
     }
 </style>
@@ -18,7 +18,7 @@
     .right {
         float: right;
         width: 50%;
-        height: 50%;
+        height: 620px;
         max-height: 50%;
         background-color: #D2E0DD;
     }
@@ -40,11 +40,11 @@
   <br/>
 </div>
 <div class="right">
-  <h2 align=center><b>Twitter Movie Information</b></h2>
+  <h2 align=center><b>From Twitter</b></h2>
 
   <div id="tickerContainer">
     <dl id="ticker">
-      <% @twitter_data.each do |data| %>
+      <% @twitter_data['response']['docs'].each do |data| %>
           <dt class="heading"><%= data['timestamp'] %></dt>
           <dd class="text"><%= data['tweet'] %></dd>
       <% end %>
@@ -111,6 +111,21 @@
       });
   </script>
 </div>
-
+<br>
+<b>FaceBook page URL:</b> <%= @facebook_data['url'] %>
+<br/>
+<b>FaceBook page fan count: </b><%= @facebook_data['fan_count'] %>
+<h2>Related/Frequent keywords</h2>
+<% for i in 0...@twitter_data['facet_counts']['facet_fields']['tweet'].length %>
+    <% if @twitter_data['facet_counts']['facet_fields']['tweet'][i+1] == 1 %>
+        <% break %>
+    <% end %>
+    <% if (i%2 !=0) %>
+        <% next %>
+    <% end %>
+    <%= @twitter_data['facet_counts']['facet_fields']['tweet'][i] %>
+    - <%= @twitter_data['facet_counts']['facet_fields']['tweet'][i+1] %>
+<br/>
+<% end %>
 </body>
 </html>
