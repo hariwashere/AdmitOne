@@ -6,6 +6,7 @@ class KeywordsController < ApplicationController
   def create
     keyword_string = params[:keyword][:keyword]
     keyword = Keyword.new
-    @op = keyword.query_solr(keyword_string)
+    @twitter_data = keyword.twitter_data(keyword_string)
+    @facebook_data = keyword.facebook_data(keyword_string)
   end
 end
