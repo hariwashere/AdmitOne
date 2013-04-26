@@ -3,14 +3,17 @@
 <head>
   <title> Admit One </title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+  <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
   <%= stylesheet_link_tag 'simpleTicker.css' %>
+  <script src="http://www.goat1000.com/tagcanvas.js?2.1.1" type="text/javascript"></script>
+
 </head>
 <body>
 <style>
     .left {
         float: left;
         width: 50%;
-        height: 620px;
+        height: 680px;
         background-color: #D2E0DD;
     }
 </style>
@@ -18,14 +21,14 @@
     .right {
         float: right;
         width: 50%;
-        height: 620px;
+        height: 680px;
         max-height: 50%;
         background-color: #D2E0DD;
     }
 </style>
 <div class="left">
   <h2 align=center><b><%= @imdb_data['title'] %></b></h2>
-  <img src="<%= @imdb_data['poster'] %>"/> <br/>
+  <img src="<%= @imdb_data['poster'] %>" style=" display: block; margin-left: auto; margin-right: auto"/> <br/>
   <b>Runtime:</b><%= @imdb_data['runtime'][0] %>
   <br/>
   <b>Rating: </b><%= @imdb_data['rating'] %>
@@ -45,7 +48,7 @@
   <div id="tickerContainer">
     <dl id="ticker">
       <% @twitter_data['response']['docs'].each do |data| %>
-          <dt class="heading"><%= data['timestamp'] %></dt>
+          <dt class="heading"><%= data['timestamp'].gsub("T", " ").gsub("Z", " ") %></dt>
           <dd class="text"><%= data['tweet'] %></dd>
       <% end %>
     </dl>
@@ -111,21 +114,56 @@
       });
   </script>
 </div>
-<br>
+<br/>
+<br/>
+<br/>
+<br/>
 <b>FaceBook page URL:</b> <%= @facebook_data['url'] %>
 <br/>
 <b>FaceBook page fan count: </b><%= @facebook_data['fan_count'] %>
-<h2>Related/Frequent keywords</h2>
-<% for i in 0...@twitter_data['facet_counts']['facet_fields']['tweet'].length %>
-    <% if @twitter_data['facet_counts']['facet_fields']['tweet'][i+1] == 1 %>
-        <% break %>
-    <% end %>
-    <% if (i%2 !=0) %>
-        <% next %>
-    <% end %>
-    <%= @twitter_data['facet_counts']['facet_fields']['tweet'][i] %>
-    - <%= @twitter_data['facet_counts']['facet_fields']['tweet'][i+1] %>
 <br/>
-<% end %>
+<b>FaceBook page description: </b><%= @facebook_data['description'] %>
+<h2>Related/Frequent keywords</h2>
+
+<div id="myCanvasContainer">
+  <canvas width="1200" height="600" id="myCanvas">
+    <p>Anything in here will be replaced on browsers that support the canvas element</p>
+  </canvas>
+</div>
+
+<div id='tags'>
+  <ul>
+    <% for i in 0...@twitter_data['facet_counts']['facet_fields']['tweet'].length %>
+        <% if @twitter_data['facet_counts']['facet_fields']['tweet'][i+1] == 1 %>
+            <% break %>
+        <% end %>
+        <% if (i%2 !=0) %>
+            <% next %>
+        <% end %>
+        <li><a href="#">
+          <%= @twitter_data['facet_counts']['facet_fields']['tweet'][i] %>
+        </a></li>
+        <br/>
+    <% end %>
+  </ul>
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function() {
+        try {
+            TagCanvas.Start('myCanvas','tags',{
+                textColour: '#000000',
+                outlineColour: '#000000',
+                reverse: true,
+                depth: 0.8,
+                maxSpeed: 0.05
+            });
+        } catch(e) {
+            // something went wrong, hide the canvas container
+            document.getElementById('myCanvasContainer').style.display = 'none';
+        }
+    };
+</script>
 </body>
 </html>
